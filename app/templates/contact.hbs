@@ -1,1 +1,37 @@
 <h1>Contact Us</h1>
+
+<form>
+  <div class="form-group {{if emailBlurred  (if validEmail 'has-success' 'has-error') }} has-feedback">
+    <label for="emailAddress">Email address</label>
+    {{input type="text" class="form-control" value=emailAddress placeholder="Enter Email" focus-out="onEmailBlur"}}
+
+    {{#if emailBlurred}}
+      {{#unless validEmail}}
+        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+      {{else}}
+        <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+      {{/unless}}
+    {{/if}}
+
+  </div>
+  <div class="form-group {{if messageBlurred (if isMessageLong 'has-success' 'has-error') }} has-feedback">
+    <label for="message">Message</label>
+    {{textarea class="form-control" placeholder="Your message. (At least 5 characters.)" rows="7" value=contactMessage focus-out="onMessageBlur"}}
+
+    {{#if messageBlurred}}
+      {{#unless isMessageLong}}
+        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+      {{else}}
+        <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+      {{/unless}}
+    {{/if}}
+  </div>
+
+
+  <button type="button" disabled={{disableSend}} name="button" class="btn btn-primary" {{action 'sendMessage'}}>Send Message</button>
+
+  <br><br>
+  {{#if responseMessage}}
+    <div class="alert alert-success" role="alert">{{responseMessage}}</div>
+  {{/if}}
+</form>
