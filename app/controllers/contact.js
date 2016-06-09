@@ -14,7 +14,11 @@ export default Ember.Controller.extend({
     sendMessage() {
       if (this.get('isValid')) {
         alert(this.get('contactMessage'));
-        this.set('responseMessage', "We got your message and we'll get in touch soon!")
+        this.set('responseMessage', "We got your message and we'll get in touch soon!");
+        this.set('emailBlurred', false);
+        this.set('messageBlurred', false);
+        this.set('emailAddress', '');
+        this.set('contactMessage', '');
       }
 
     },
